@@ -1544,6 +1544,8 @@ enum e_char_del_response char_delete(struct char_session_data* sd, uint32 char_i
 	time_t delete_date;
 	char *data;
 	size_t len;
+ data = 0;
+ len = 0;
 	int i;
 
 	ARR_FIND(0, MAX_CHARS, i, sd->found_char[i] == char_id);
@@ -1882,6 +1884,7 @@ int char_married(int pl1, int pl2)
 	else if( SQL_SUCCESS == Sql_NextRow(sql_handle) )
 	{
 		char* data;
+  data = nullptr;
 
 		Sql_GetData(sql_handle, 0, &data, NULL);
 		if( pl2 == atoi(data) )
@@ -1903,6 +1906,7 @@ int char_child(int parent_id, int child_id)
 	else if( SQL_SUCCESS == Sql_NextRow(sql_handle) )
 	{
 		char* data;
+  data = nullptr;
 
 		Sql_GetData(sql_handle, 0, &data, NULL);
 		if( child_id == atoi(data) )
@@ -1927,6 +1931,7 @@ int char_family(int cid1, int cid2, int cid3)
 		int partnerid;
 		int childid;
 		char* data;
+  data = nullptr;
 
 		Sql_GetData(sql_handle, 0, &data, NULL); charid = atoi(data);
 		Sql_GetData(sql_handle, 1, &data, NULL); partnerid = atoi(data);
@@ -2013,7 +2018,9 @@ void char_read_fame_list(void)
 {
 	int i;
 	char* data;
+ data = nullptr;
 	size_t len;
+ len = 0;
 
 	// Empty ranking lists
 	memset(smith_fame_list, 0, sizeof(smith_fame_list));
@@ -2071,7 +2078,9 @@ void char_read_fame_list(void)
 //Returns 1 on found, 0 on not found (buffer is filled with Unknown char name)
 int char_loadName(uint32 char_id, char* name){
 	char* data;
+ data = nullptr;
 	size_t len;
+ len = 0;
 
 	if( SQL_ERROR == Sql_Query(sql_handle, "SELECT `name` FROM `%s` WHERE `char_id`='%d'", schema_config.char_db, char_id) )
 		Sql_ShowDebug(sql_handle);
